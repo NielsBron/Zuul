@@ -5,12 +5,14 @@ namespace Zuul
 	public class Game
 	{
 		private Parser parser;
-		private Room currentRoom;
+		private Player player;
+
 
 		public Game ()
 		{
-			CreateRooms();
 			parser = new Parser();
+			player = new Player();
+			CreateRooms();
 		}
 
 		private void CreateRooms()
@@ -44,7 +46,7 @@ namespace Zuul
 
 			attic.AddExit("down", theatre);
 
-			currentRoom = outside;  // start game outside
+			player.CurrentRoom = outside;  // start game outside
 		}
 
 		/**
@@ -77,7 +79,7 @@ namespace Zuul
 			Console.WriteLine("Zaun is a short adventure, puzzle game.");
 			Console.WriteLine("Type 'help' if you need help.");
 			Console.WriteLine();
-			Console.WriteLine(currentRoom.GetLongDescription());
+			Console.WriteLine(player.CurrentRoom.GetLongDescription());
 		}
 
 		/**
@@ -108,7 +110,7 @@ namespace Zuul
 					wantToQuit = true;
 					break;
 				case "look":
-					Console.WriteLine(currentRoom.GetLongDescription());
+					Console.WriteLine(player.CurrentRoom.GetLongDescription());
 					break;
 			}
 
@@ -146,7 +148,7 @@ namespace Zuul
 			string direction = command.GetSecondWord();
 
 			// Try to go to the next room.
-			Room nextRoom = currentRoom.GetExit(direction);
+			Room nextRoom = player.CurrentRoom.GetExit(direction);
 
 			if (nextRoom == null)
 			{
@@ -154,8 +156,8 @@ namespace Zuul
 			}
 			else
 			{
-				currentRoom = nextRoom;
-				Console.WriteLine(currentRoom.GetLongDescription());
+				player.CurrentRoom = nextRoom;
+				Console.WriteLine(player.CurrentRoom.GetLongDescription());
 			}
 		}
 
