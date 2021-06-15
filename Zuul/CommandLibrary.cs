@@ -20,6 +20,7 @@ namespace Zuul
 			validCommands.Add("look");
 			validCommands.Add("up");
 			validCommands.Add("down");
+			validCommands.Add("status");
 		}
 
 		/**

@@ -112,6 +112,9 @@ namespace Zuul
 				case "look":
 					Console.WriteLine(player.CurrentRoom.GetLongDescription());
 					break;
+				case "status":
+					Console.WriteLine("u are 100% healthy");
+					break;
 			}
 
 			return wantToQuit;
