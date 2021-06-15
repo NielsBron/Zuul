@@ -21,6 +21,8 @@ namespace Zuul
 			Room pub = new Room("in the campus pub");
 			Room lab = new Room("in a computing lab");
 			Room office = new Room("in the computing admin office");
+			Room basement = new Room("In the basement");
+			Room attic = new Room("In the Attic");
 
 			// initialise room exits
 			outside.AddExit("east", theatre);
@@ -28,13 +30,19 @@ namespace Zuul
 			outside.AddExit("west", pub);
 
 			theatre.AddExit("west", outside);
-
+			theatre.AddExit("down", basement);
+			theatre.AddExit("up", attic);
+			
 			pub.AddExit("east", outside);
 
 			lab.AddExit("north", outside);
 			lab.AddExit("east", office);
 
 			office.AddExit("west", lab);
+
+			basement.AddExit("up", theatre);
+
+			attic.AddExit("down", theatre);
 
 			currentRoom = outside;  // start game outside
 		}
@@ -100,7 +108,7 @@ namespace Zuul
 					wantToQuit = true;
 					break;
 				case "look":
-					Console.WriteLine("you are blind...");
+					Console.WriteLine(currentRoom.GetLongDescription());
 					break;
 			}
 
